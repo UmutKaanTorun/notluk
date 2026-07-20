@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "description": "Mac için sade, ortak çalışmalı not uygulaması",
   "author": "Umut Torun",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "type": "module",
   "main": "electron/main.cjs",
   "scripts": {
