@@ -2,8 +2,8 @@
 
 set -euo pipefail
 
-REPOSITORY="UmutKaanTorun/sade-not"
-REMOTE_URL="https://github.com/UmutKaanTorun/sade-not.git"
+REPOSITORY="UmutKaanTorun/sade-not-public"
+REMOTE_URL="https://github.com/UmutKaanTorun/sade-not-public.git"
 WORKFLOW_FILE="build-macos.yml"
 ARTIFACT_NAME="Sade-Not-macOS"
 

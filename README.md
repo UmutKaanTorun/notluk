@@ -81,7 +81,7 @@ GitHub Actions kullanmak için **Build macOS DMG** iş akışını manuel çalı
 
 ### Tek Tıkla GitHub'a Yükleme
 
-Mac üzerinde `GitHuba-Yukle.command` dosyasını açabilirsiniz. Yardımcı dosya GitHub oturumunu tarayıcıda doğrular, kaynakları `UmutKaanTorun/sade-not` deposunun `main` dalına gönderir, **Build macOS DMG** iş akışını takip eder ve tamamlanan DMG dosyalarını `release-from-github/` klasörüne indirir.
+Mac üzerinde `GitHuba-Yukle.command` dosyasını açabilirsiniz. Yardımcı dosya GitHub oturumunu tarayıcıda doğrular, kaynakları `UmutKaanTorun/sade-not-public` deposunun `main` dalına gönderir, **Build macOS DMG** iş akışını takip eder ve tamamlanan DMG dosyalarını `release-from-github/` klasörüne indirir.
 
 macOS dosyayı doğrudan açmazsa sağ tıklayıp **Aç** seçeneğini kullanın veya Terminal'de şu komutu çalıştırın:
 
