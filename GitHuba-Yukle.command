@@ -75,7 +75,12 @@ if [ "$tree_sha" = "$parent_tree_sha" ]; then
   commit_sha="$parent_sha"
   echo "Kaynaklar GitHub'da zaten güncel."
 else
-  commit_sha="$(printf '%s\n' 'feat: add Sade Not macOS MVP' | git commit-tree "$tree_sha" -p "$parent_sha")"
+  if git cat-file -e "${parent_sha}:package.json" 2>/dev/null; then
+    commit_message="fix: stabilize macOS DMG workflow"
+  else
+    commit_message="feat: add Sade Not macOS MVP"
+  fi
+  commit_sha="$(printf '%s\n' "$commit_message" | git commit-tree "$tree_sha" -p "$parent_sha")"
   git update-ref refs/heads/main "$commit_sha"
   git symbolic-ref HEAD refs/heads/main
   echo "Kaynaklar GitHub'a gönderiliyor..."

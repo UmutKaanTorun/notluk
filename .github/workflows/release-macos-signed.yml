@@ -12,10 +12,10 @@ jobs:
     timeout-minutes: 40
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Use Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
@@ -43,7 +43,7 @@ jobs:
           echo "APPLE_API_KEY=$key_path" >> "$GITHUB_ENV"
 
       - name: Build, sign and notarize DMG files
-        run: npx electron-builder --mac dmg -c.mac.notarize=true
+        run: npx electron-builder --mac dmg -c.mac.notarize=true --publish never
         env:
           CSC_LINK: ${{ secrets.MAC_CERTIFICATE_P12_BASE64 }}
           CSC_KEY_PASSWORD: ${{ secrets.MAC_CERTIFICATE_PASSWORD }}
