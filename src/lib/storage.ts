@@ -1,10 +1,10 @@
 import { seedData } from '../data/seed'
 import type { AppData, CloudConfig } from '../types'
 
-export const DATA_KEY = 'sadenot:data:v1'
-export const CLOUD_KEY = 'sadenot:cloud:v1'
-export const THEME_KEY = 'sadenot:theme'
-export const UI_KEY = 'sadenot:ui:v1'
+export const DATA_KEY = 'notluk:data:v1'
+export const CLOUD_KEY = 'notluk:cloud:v1'
+export const THEME_KEY = 'notluk:theme'
+export const UI_KEY = 'notluk:ui:v1'
 
 export interface StoredUiState {
   workspaceId: string

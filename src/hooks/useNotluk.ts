@@ -53,7 +53,7 @@ function openExternal(url: string) {
   return Promise.resolve(true)
 }
 
-export function useSadeNot() {
+export function useNotluk() {
   const initialUi = useMemo(() => loadUiState(), [])
   const [cloudConfig, setCloudConfigState] = useState<CloudConfig | null>(() => loadCloudConfig())
   const [session, setSession] = useState<Session | null>(null)
@@ -123,7 +123,7 @@ export function useSadeNot() {
         refreshTimer.current = setTimeout(() => refreshCloud(client, activeSession, true), 700)
       }
       channel = client
-        .channel(`sadenot:${activeSession.user.id}`)
+        .channel(`notluk:${activeSession.user.id}`)
         .on('postgres_changes', { event: '*', schema: 'public', table: 'notes' }, scheduleRefresh)
         .on('postgres_changes', { event: '*', schema: 'public', table: 'workspace_members' }, scheduleRefresh)
         .on('postgres_changes', { event: '*', schema: 'public', table: 'workspaces' }, scheduleRefresh)
@@ -467,10 +467,10 @@ export function useSadeNot() {
         const body = [
           'Merhaba,',
           '',
-          `Sade Not uygulamasındaki “${activeWorkspace.name}” çalışma alanına davet edildin.`,
+          `Notluk uygulamasındaki “${activeWorkspace.name}” çalışma alanına davet edildin.`,
           `Uygulamaya ${normalized} e-posta adresiyle giriş yaptığında ortak notları görebilirsin.`,
           '',
-          `Sade Not’u aç: sadenot://invite?workspace=${activeWorkspace.id}`,
+          `Notluk’u aç: notluk://invite?workspace=${activeWorkspace.id}`,
         ].join('\n')
         await openExternal(
           `mailto:${encodeURIComponent(normalized)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,

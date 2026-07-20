@@ -1,5 +1,5 @@
 {
-  "name": "sade-not",
+  "name": "notluk",
   "private": true,
   "version": "0.1.0",
   "description": "Mac için sade, ortak çalışmalı not uygulaması",
@@ -39,8 +39,8 @@
     "wait-on": "^9.0.10"
   },
   "build": {
-    "appId": "com.umuttorun.sadenot",
-    "productName": "Sade Not",
+    "appId": "com.umuttorun.notluk",
+    "productName": "Notluk",
     "asar": true,
     "directories": {
       "output": "release",
@@ -53,9 +53,9 @@
     ],
     "protocols": [
       {
-        "name": "Sade Not",
+        "name": "Notluk",
         "schemes": [
-          "sadenot"
+          "notluk"
         ]
       }
     ],
@@ -78,7 +78,7 @@
       ]
     },
     "dmg": {
-      "title": "Sade Not",
+      "title": "Notluk",
       "window": {
         "width": 540,
         "height": 380
@@ -97,6 +97,6 @@
         }
       ]
     },
-    "artifactName": "Sade-Not-${version}-${arch}.${ext}"
+    "artifactName": "Notluk-${version}-${arch}.${ext}"
   }
 }

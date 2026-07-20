@@ -1,6 +1,6 @@
 # Katkıda Bulunma
 
-Sade Not erken aşamada bir macOS not uygulamasıdır. Küçük ve odaklı değişiklikler en hızlı şekilde incelenir.
+Notluk erken aşamada bir macOS not uygulamasıdır. Küçük ve odaklı değişiklikler en hızlı şekilde incelenir.
 
 ## Geliştirme Kurulumu
 

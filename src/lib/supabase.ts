@@ -23,7 +23,7 @@ export function getSupabase(config: CloudConfig): SupabaseClient {
 }
 
 export async function sendMagicLink(client: SupabaseClient, email: string): Promise<void> {
-  const redirectTo = import.meta.env.VITE_AUTH_REDIRECT_URL || 'sadenot://auth/callback'
+  const redirectTo = import.meta.env.VITE_AUTH_REDIRECT_URL || 'notluk://auth/callback'
   const { error } = await client.auth.signInWithOtp({
     email,
     options: { emailRedirectTo: redirectTo },

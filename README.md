@@ -1,10 +1,10 @@
-# Sade Not
+# Notluk
 
 Mac için sade, hızlı ve ortak çalışmaya hazır not uygulaması.
 
-![Sade Not arayüzü](docs/images/sade-not.png)
+![Notluk arayüzü](docs/images/notluk.png)
 
-Sade Not, yerel demo moduyla hemen açılan; Supabase bağlandığında e-posta ile şifresiz giriş, çalışma alanı üyeliği ve cihazlar arası canlı güncelleme sunan bir Electron uygulamasıdır.
+Notluk, yerel demo moduyla hemen açılan; Supabase bağlandığında e-posta ile şifresiz giriş, çalışma alanı üyeliği ve cihazlar arası canlı güncelleme sunan bir Electron uygulamasıdır.
 
 ## Özellikler
 
@@ -23,7 +23,7 @@ Sade Not, yerel demo moduyla hemen açılan; Supabase bağlandığında e-posta 
 
 | Açık tema | Koyu tema |
 | --- | --- |
-| ![Sade Not açık tema](docs/images/sade-not.png) | ![Sade Not koyu tema](docs/images/sade-not-dark.png) |
+| ![Notluk açık tema](docs/images/notluk.png) | ![Notluk koyu tema](docs/images/notluk-dark.png) |
 
 ## Yerel Geliştirme
 
@@ -55,7 +55,7 @@ npm run build
 
 1. Supabase üzerinde yeni bir proje oluşturun.
 2. `supabase/schema.sql` dosyasını Dashboard -> SQL Editor içinde çalıştırın.
-3. Authentication -> URL Configuration -> Redirect URLs alanına `sadenot://auth/callback` ekleyin.
+3. Authentication -> URL Configuration -> Redirect URLs alanına `notluk://auth/callback` ekleyin.
 4. Uygulamada Ayarlar -> Bulut ve ortak çalışma bölümünü açın.
 5. Project URL ve publishable key değerlerini girin.
 6. E-postaya gelen bağlantı ile giriş yapın.
@@ -74,14 +74,14 @@ npm run build:mac
 
 Oluşan dosyalar `release/` klasörüne yazılır:
 
-- `Sade-Not-0.1.0-arm64.dmg`
-- `Sade-Not-0.1.0-x64.dmg`
+- `Notluk-0.1.0-arm64.dmg`
+- `Notluk-0.1.0-x64.dmg`
 
-GitHub Actions kullanmak için **Build macOS DMG** iş akışını manuel çalıştırın veya `main` dalına push yapın. DMG dosyaları iş akışı sonunda `Sade-Not-macOS` artifact'i olarak sunulur.
+GitHub Actions kullanmak için **Build macOS DMG** iş akışını manuel çalıştırın veya `main` dalına push yapın. DMG dosyaları iş akışı sonunda `Notluk-macOS` artifact'i olarak sunulur.
 
 ### Tek Tıkla GitHub'a Yükleme
 
-Mac üzerinde `GitHuba-Yukle.command` dosyasını açabilirsiniz. Yardımcı dosya GitHub oturumunu tarayıcıda doğrular, kaynakları `UmutKaanTorun/sade-not-public` deposunun `main` dalına gönderir, **Build macOS DMG** iş akışını takip eder ve tamamlanan DMG dosyalarını `release-from-github/` klasörüne indirir.
+Mac üzerinde `GitHuba-Yukle.command` dosyasını açabilirsiniz. Yardımcı dosya GitHub oturumunu tarayıcıda doğrular, kaynakları `UmutKaanTorun/notluk` deposunun `main` dalına gönderir, **Build macOS DMG** iş akışını takip eder ve tamamlanan DMG dosyalarını `release-from-github/` klasörüne indirir.
 
 macOS dosyayı doğrudan açmazsa sağ tıklayıp **Aç** seçeneğini kullanın veya Terminal'de şu komutu çalıştırın:
 

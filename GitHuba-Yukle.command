@@ -2,15 +2,15 @@
 
 set -euo pipefail
 
-REPOSITORY="UmutKaanTorun/sade-not-public"
-REMOTE_URL="https://github.com/UmutKaanTorun/sade-not-public.git"
+REPOSITORY="UmutKaanTorun/notluk"
+REMOTE_URL="https://github.com/UmutKaanTorun/notluk.git"
 WORKFLOW_FILE="build-macos.yml"
-ARTIFACT_NAME="Sade-Not-macOS"
+ARTIFACT_NAME="Notluk-macOS"
 
 cd "$(dirname "$0")"
 
 echo ""
-echo "Sade Not — GitHub ve DMG hazırlayıcı"
+echo "Notluk — GitHub ve DMG hazırlayıcı"
 echo "===================================="
 echo ""
 
@@ -78,7 +78,7 @@ else
   if git cat-file -e "${parent_sha}:package.json" 2>/dev/null; then
     commit_message="fix: stabilize macOS DMG workflow"
   else
-    commit_message="feat: add Sade Not macOS MVP"
+    commit_message="feat: add Notluk macOS MVP"
   fi
   commit_sha="$(printf '%s\n' "$commit_message" | git commit-tree "$tree_sha" -p "$parent_sha")"
   git update-ref refs/heads/main "$commit_sha"

@@ -44,7 +44,7 @@ import {
 } from 'lucide-react'
 import type { CloudConfig, Member, MemberRole, Note, SaveState, Workspace } from './types'
 import { THEME_KEY } from './lib/storage'
-import { type NoteFilter, useSadeNot } from './hooks/useSadeNot'
+import { type NoteFilter, useNotluk } from './hooks/useNotluk'
 
 type Theme = 'light' | 'dark' | 'system'
 
@@ -172,7 +172,7 @@ function AuthScreen({
     <main className="auth-page">
       <section className="auth-card">
         <div className="auth-logo"><LogoMark size={38} /></div>
-        <p className="eyebrow">SADE NOT</p>
+        <p className="eyebrow">NOTLUK</p>
         <h1>{sent ? 'E-postanı kontrol et' : 'Notlarına dön'}</h1>
         <p className="auth-copy">
           {sent
@@ -182,7 +182,7 @@ function AuthScreen({
         {sent ? (
           <div className="auth-sent">
             <Check size={20} />
-            Bağlantıya tıkladığında Sade Not otomatik açılacak.
+            Bağlantıya tıkladığında Notluk otomatik açılacak.
           </div>
         ) : (
           <form onSubmit={submit} className="auth-form">
@@ -473,7 +473,7 @@ function SharePanel({
   }
 
   async function copyLink() {
-    await navigator.clipboard.writeText(`sadenot://invite?workspace=${workspace.id}`)
+    await navigator.clipboard.writeText(`notluk://invite?workspace=${workspace.id}`)
     onToast('Davet bağlantısı kopyalandı.')
   }
 
@@ -789,7 +789,7 @@ function SettingsModal({
 }
 
 function App() {
-  const app = useSadeNot()
+  const app = useNotluk()
   const [shareOpen, setShareOpen] = useState(false)
   const [workspaceModalOpen, setWorkspaceModalOpen] = useState(false)
   const [settingsOpen, setSettingsOpen] = useState(false)
@@ -855,7 +855,7 @@ function App() {
     <div className="app-shell">
       <header className="titlebar">
         <div className="titlebar-spacer" />
-        <div className="app-title"><LogoMark /><strong>Sade Not</strong></div>
+        <div className="app-title"><LogoMark /><strong>Notluk</strong></div>
         <button type="button" className="quick-new" onClick={() => void app.createNote()}><Plus size={14} /><kbd>⌘N</kbd></button>
       </header>
       <div className="workspace-layout">

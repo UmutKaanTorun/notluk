@@ -1,7 +1,7 @@
 const { app, BrowserWindow, ipcMain, shell } = require('electron')
 const path = require('node:path')
 
-const PROTOCOL = 'sadenot'
+const PROTOCOL = 'notluk'
 let mainWindow = null
 let pendingDeepLink = null
 
@@ -31,7 +31,7 @@ function createWindow() {
     minWidth: 1040,
     minHeight: 680,
     backgroundColor: '#f7f7f8',
-    title: 'Sade Not',
+    title: 'Notluk',
     titleBarStyle: 'hiddenInset',
     trafficLightPosition: { x: 18, y: 19 },
     show: false,
@@ -57,7 +57,7 @@ function createWindow() {
     mainWindow.loadFile(path.join(__dirname, '..', 'dist', 'index.html'))
   } else {
     mainWindow.loadURL('http://127.0.0.1:5173')
-    if (process.env.SADENOT_OPEN_DEVTOOLS === '1') mainWindow.webContents.openDevTools({ mode: 'detach' })
+    if (process.env.NOTLUK_OPEN_DEVTOOLS === '1') mainWindow.webContents.openDevTools({ mode: 'detach' })
   }
 
   mainWindow.webContents.on('did-finish-load', () => {

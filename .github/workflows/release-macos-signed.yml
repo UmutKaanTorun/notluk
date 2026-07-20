@@ -54,7 +54,7 @@ jobs:
       - name: Upload signed DMG artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: Sade-Not-signed-macOS
+          name: Notluk-signed-macOS
           path: release/*.dmg
           if-no-files-found: error
           retention-days: 30

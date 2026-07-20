@@ -144,7 +144,7 @@ export const seedData: AppData = {
     {
       id: 'personal-welcome',
       workspaceId: 'personal',
-      title: 'Sade Not’a hoş geldin',
+      title: 'Notluk’a hoş geldin',
       content:
         '<h2>Hızlı başlangıç</h2><p>Sol taraftan yeni bir çalışma alanı, orta sütundan yeni bir not oluşturabilirsin.</p><blockquote>Paylaş düğmesiyle e-posta üzerinden ekip arkadaşlarını davet et.</blockquote>',
       plainText: 'Uygulamayı kullanmaya başlamak için kısa not.',
