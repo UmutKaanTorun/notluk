@@ -49,8 +49,11 @@ jobs:
 
       - name: Build DMG files
         run: npm run build:mac
-        env:
-          CSC_IDENTITY_AUTO_DISCOVERY: false
+
+      - name: Add stable DMG names
+        run: |
+          cp "release/Notluk-${TAG_NAME#v}-arm64.dmg" release/Notluk-arm64.dmg
+          cp "release/Notluk-${TAG_NAME#v}-x64.dmg" release/Notluk-x64.dmg
 
       - name: Copy README images
         run: |
