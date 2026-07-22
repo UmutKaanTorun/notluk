@@ -1,3 +1,5 @@
+<!-- Notluk repository overview. -->
+
 <p align="center">
   <img src="build/icon.png" width="104" alt="Notluk logo">
 </p>

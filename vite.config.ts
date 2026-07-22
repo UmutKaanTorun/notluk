@@ -1,6 +1,7 @@
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vitest/config'
 
+// Notluk Vite and Vitest configuration.
 export default defineConfig({
   base: './',
   plugins: [react()],

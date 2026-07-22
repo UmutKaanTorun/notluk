@@ -1,4 +1,4 @@
--- Notluk · Supabase şeması
+-- Notluk · Supabase veritabanı şeması
 -- Supabase Dashboard > SQL Editor içinde tek seferde çalıştırın.
 
 create extension if not exists pgcrypto;

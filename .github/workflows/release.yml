@@ -1,4 +1,5 @@
 name: Build DMG release
+# Notluk release workflow.
 
 on:
   push:

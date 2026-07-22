@@ -1,4 +1,5 @@
 {
+  // Notluk renderer TypeScript settings.
   "compilerOptions": {
     "target": "ES2022",
     "useDefineForClassFields": true,

@@ -1,5 +1,6 @@
 const { contextBridge, ipcRenderer } = require('electron')
 
+// Notluk desktop bridge.
 contextBridge.exposeInMainWorld('desktop', {
   platform: process.platform,
   openExternal: (url) => ipcRenderer.invoke('open-external', url),

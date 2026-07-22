@@ -1,4 +1,5 @@
 {
+  // Notluk TypeScript project references.
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
