@@ -222,7 +222,7 @@ function AuthScreen({
 
   return (
     <main className="auth-page">
-      <section className="auth-card">
+      <section className={`auth-card ${step === 'code' ? 'auth-card-code' : ''}`}>
         <div className="auth-logo"><LogoMark size={46} /></div>
         {step === 'code' ? (
           <>
