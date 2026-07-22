@@ -84,7 +84,7 @@ npm run build
 6. `supabase/email-templates/magic-link-or-otp.html` içeriğini e-posta body alanına yapıştırın.
 7. Uygulamada Ayarlar -> Bulut ve ortak çalışma bölümünü açın.
 8. Project URL ve publishable key değerlerini girin.
-9. E-postaya gelen 6 haneli kod ile giriş yapın.
+9. E-postaya gelen doğrulama kodu ile giriş yapın.
 
 `sb_publishable_...` anahtarı istemci uygulamalarında kullanılmak üzere tasarlanmıştır ve derlenmiş masaüstü uygulamasında bulunabilir. `sb_secret_...` veya `service_role` anahtarını hiçbir zaman uygulamaya, GitHub'a ya da sohbetlere eklemeyin.
 

@@ -12,7 +12,7 @@ Gövde:
 
 `magic-link-or-otp.html` dosyasını kullanın.
 
-Önemli: Şablonda `{{ .ConfirmationURL }}` kalırsa Supabase bağlantı gönderir. 6 haneli kod için gövdede `{{ .Token }}` yer almalıdır.
+Önemli: Şablonda `{{ .ConfirmationURL }}` kalırsa Supabase bağlantı gönderir. Doğrulama kodu için gövdede `{{ .Token }}` yer almalıdır.
 
 Gönderen adı:
 

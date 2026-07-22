@@ -185,8 +185,8 @@ function AuthScreen({
   async function submitCode(event: FormEvent) {
     event.preventDefault()
     const cleaned = code.replace(/\D/g, '')
-    if (cleaned.length !== 6) {
-      setError('6 haneli doğrulama kodunu gir.')
+    if (cleaned.length < 6 || cleaned.length > 8) {
+      setError('E-postadaki doğrulama kodunu gir.')
       return
     }
     setBusy(true)
@@ -228,7 +228,7 @@ function AuthScreen({
           <>
             <h1>Doğrulama kodunu gir</h1>
             <p className="auth-copy strong">
-              6 haneli kodu <strong>{email}</strong> adresine gönderdik.
+              Doğrulama kodunu <strong>{email}</strong> adresine gönderdik.
             </p>
             <p className="auth-note">
               Kodun gelmesi birkaç dakika sürebilir. Spam klasörünü de kontrol et.
@@ -241,10 +241,10 @@ function AuthScreen({
                 inputMode="numeric"
                 autoComplete="one-time-code"
                 pattern="[0-9]*"
-                maxLength={6}
-                placeholder="1 2 3 4 5 6"
+                maxLength={8}
+                placeholder="1 2 3 4 5 6 7 8"
                 value={code}
-                onChange={(event) => setCode(event.target.value.replace(/\D/g, '').slice(0, 6))}
+                onChange={(event) => setCode(event.target.value.replace(/\D/g, '').slice(0, 8))}
                 autoFocus
               />
               {error && <p className="form-error">{error}</p>}
