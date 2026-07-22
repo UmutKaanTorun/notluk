@@ -52,11 +52,18 @@ jobs:
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: false
 
+      - name: Copy README images
+        run: |
+          curl -fsSL -o release/notluk.png \
+            "https://github.com/$GITHUB_REPOSITORY/releases/latest/download/notluk.png"
+          curl -fsSL -o release/notluk-dark.png \
+            "https://github.com/$GITHUB_REPOSITORY/releases/latest/download/notluk-dark.png"
+
       - name: Publish GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "$TAG_NAME" release/*.dmg \
+          gh release create "$TAG_NAME" release/*.dmg release/notluk.png release/notluk-dark.png \
             --repo "$GITHUB_REPOSITORY" \
             --title "Notluk $TAG_NAME" \
             --notes "GitHub Actions tarafindan otomatik olusturuldu." \
