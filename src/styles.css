@@ -333,37 +333,13 @@ button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-
   overflow: hidden;
   background: #050505;
 }
-.auth-page::before {
-  content: 'Notluk';
-  position: absolute;
-  right: 4%;
-  top: 22%;
-  color: #d77b09;
-  font-size: 82px;
-  font-weight: 800;
-  opacity: .38;
-  filter: blur(12px);
-}
-.auth-page::after {
-  content: '';
-  position: absolute;
-  right: 8%;
-  bottom: 14%;
-  width: 280px;
-  height: 54px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #9b4d00, #f08b10);
-  opacity: .62;
-  filter: blur(10px);
-  transform: rotate(-36deg);
-}
 .auth-card {
   position: relative;
   z-index: 1;
-  width: min(560px, 100%);
-  min-height: 560px;
-  padding: 62px 58px 30px;
-  border-radius: 34px;
+  width: min(500px, 100%);
+  min-height: 500px;
+  padding: 52px 52px 28px;
+  border-radius: 30px;
   background: #fbfbfa;
   box-shadow: 0 34px 70px rgb(0 0 0 / 34%);
   color: #242424;
@@ -372,41 +348,14 @@ button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-
 .auth-logo {
   display: flex;
   justify-content: center;
-  margin-bottom: 64px;
+  margin-bottom: 44px;
 }
 .auth-logo .logo-mark {
-  position: relative;
-  overflow: visible;
-  padding: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: 0 18px 34px rgb(0 0 0 / 16%);
-}
-.auth-logo .logo-mark span { display: none; }
-.auth-logo .logo-mark::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 5px;
-  width: 36px;
-  height: 34px;
-  background: linear-gradient(90deg, #ffad08, #ffd414);
-}
-.auth-logo .logo-mark::after {
-  content: '';
-  position: absolute;
-  left: 9px;
-  top: 34px;
-  width: 0;
-  height: 0;
-  border-left: 18px solid transparent;
-  border-right: 18px solid transparent;
-  border-top: 20px solid #1f1f1f;
-  filter: drop-shadow(0 -10px 0 #dedede);
+  box-shadow: 0 18px 34px rgb(75 87 220 / 20%);
 }
 .auth-card h1 {
-  margin: 0 0 42px;
-  font-size: 35px;
+  margin: 0 0 34px;
+  font-size: 31px;
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: 0;
@@ -439,14 +388,14 @@ button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-
 }
 .auth-form input,
 .auth-form textarea {
-  height: 60px;
-  margin-bottom: 24px;
-  padding: 0 22px;
+  height: 54px;
+  margin-bottom: 20px;
+  padding: 0 20px;
   border: 1px solid #d2d2d2;
-  border-radius: 13px;
+  border-radius: 12px;
   background: #fff;
   color: #242424;
-  font-size: 20px;
+  font-size: 18px;
 }
 .auth-form textarea {
   height: auto;
@@ -467,11 +416,11 @@ button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-
   font-weight: 650;
 }
 .auth-submit.primary-button {
-  min-height: 60px;
+  min-height: 54px;
   border-radius: 12px;
   background: #242424;
   color: #fff;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 780;
 }
 .auth-submit.primary-button:hover { background: #101010; }
@@ -491,9 +440,9 @@ button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-
 }
 .auth-legal {
   max-width: 340px;
-  margin: 38px auto 0;
+  margin: 30px auto 0;
   color: #6d7483;
-  font-size: 14px;
+  font-size: 12.5px;
   line-height: 1.45;
 }
 .auth-demo {
