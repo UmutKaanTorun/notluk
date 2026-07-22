@@ -16,7 +16,7 @@
   <a href="https://github.com/UmutKaanTorun/notluk/releases/latest">Son sürüm</a>
 </p>
 
-![Notluk arayüzü](docs/images/notluk.png)
+![Notluk arayüzü](https://github.com/UmutKaanTorun/notluk/releases/latest/download/notluk.png)
 
 Notluk, yerel demo moduyla hemen açılan; Supabase bağlandığında e-posta ile şifresiz giriş, çalışma alanı üyeliği ve cihazlar arası canlı güncelleme sunan bir Electron uygulamasıdır.
 
@@ -44,7 +44,7 @@ macOS uygulama imzalanmamış derlemeyi açarken uyarı gösterebilir. Dosyayı 
 
 | Açık tema | Koyu tema |
 | --- | --- |
-| ![Notluk açık tema](docs/images/notluk.png) | ![Notluk koyu tema](docs/images/notluk-dark.png) |
+| ![Notluk açık tema](https://github.com/UmutKaanTorun/notluk/releases/latest/download/notluk.png) | ![Notluk koyu tema](https://github.com/UmutKaanTorun/notluk/releases/latest/download/notluk-dark.png) |
 
 ## Yerel Geliştirme
 
@@ -98,32 +98,11 @@ Oluşan dosyalar `release/` klasörüne yazılır:
 - `Notluk-0.1.0-arm64.dmg`
 - `Notluk-0.1.0-x64.dmg`
 
-GitHub Actions kullanmak için **Build macOS DMG** iş akışını manuel çalıştırın veya `main` dalına push yapın. DMG dosyaları iş akışı sonunda `Notluk-macOS` artifact'i olarak sunulur.
+Hazır DMG dosyaları için [son sürüm sayfasını](https://github.com/UmutKaanTorun/notluk/releases/latest) kullanın.
 
-### Tek Tıkla GitHub'a Yükleme
+## İmzalama Notu
 
-Mac üzerinde `GitHuba-Yukle.command` dosyasını açabilirsiniz. Yardımcı dosya GitHub oturumunu tarayıcıda doğrular, kaynakları `UmutKaanTorun/notluk` deposunun `main` dalına gönderir, **Build macOS DMG** iş akışını takip eder ve tamamlanan DMG dosyalarını `release-from-github/` klasörüne indirir.
-
-macOS dosyayı doğrudan açmazsa sağ tıklayıp **Aç** seçeneğini kullanın veya Terminal'de şu komutu çalıştırın:
-
-```bash
-bash GitHuba-Yukle.command
-```
-
-GitHub parolanızı, token'inizi veya Apple sertifikalarınızı bu dosyaya yazmayın.
-
-## İmzalı ve Noter Onaylı DMG
-
-Apple Developer hesabınız varsa GitHub deposunda **Settings -> Secrets and variables -> Actions** bölümüne şu secret değerlerini ekleyin:
-
-- `MAC_CERTIFICATE_P12_BASE64`: Developer ID Application sertifikasının `.p12` çıktısı, base64 biçiminde
-- `MAC_CERTIFICATE_PASSWORD`: `.p12` dışa aktarma parolası
-- `APPLE_API_KEY_P8_BASE64`: App Store Connect API anahtarının `.p8` dosyası, base64 biçiminde
-- `APPLE_API_KEY_ID`: App Store Connect Key ID
-- `APPLE_API_ISSUER`: App Store Connect Issuer ID
-- `APPLE_TEAM_ID`: Apple Developer Team ID
-
-Ardından GitHub Actions içinden **Release Signed macOS DMG** iş akışını çalıştırın. Bu akış uygulamayı Developer ID ile imzalar, Apple noter kontrolüne gönderir ve Intel/Apple Silicon DMG dosyalarını artifact olarak sunar.
+Yayınlanan DMG dosyaları imzasızdır. Apple Developer hesabıyla imzalı ve noter onaylı dağıtım yapmak için sertifika ve App Store Connect anahtarlarını yalnızca yerel makinede veya güvenli CI secret alanında kullanın; kaynak koda eklemeyin.
 
 ## Ortak Düzenleme Davranışı
 
