@@ -140,17 +140,34 @@ function SaveIndicator({ state, cloud }: { state: SaveState; cloud: boolean }) {
 
 function AuthScreen({
   onSignIn,
+  onVerify,
   onDemo,
 }: {
   onSignIn: (email: string) => Promise<void>
+  onVerify: (email: string, code: string) => Promise<void>
   onDemo: () => void
 }) {
   const [email, setEmail] = useState('')
-  const [sent, setSent] = useState(false)
+  const [code, setCode] = useState('')
+  const [step, setStep] = useState<'email' | 'code'>('email')
+  const [resendIn, setResendIn] = useState(0)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
 
-  async function submit(event: FormEvent) {
+  useEffect(() => {
+    if (step !== 'code' || resendIn <= 0) return undefined
+    const timer = window.setTimeout(() => setResendIn((current) => Math.max(0, current - 1)), 1000)
+    return () => window.clearTimeout(timer)
+  }, [resendIn, step])
+
+  async function requestCode() {
+    await onSignIn(email.trim().toLowerCase())
+    setStep('code')
+    setCode('')
+    setResendIn(60)
+  }
+
+  async function submitEmail(event: FormEvent) {
     event.preventDefault()
     if (!/^\S+@\S+\.\S+$/.test(email)) {
       setError('Geçerli bir e-posta adresi gir.')
@@ -159,33 +176,96 @@ function AuthScreen({
     setBusy(true)
     setError('')
     try {
-      await onSignIn(email)
-      setSent(true)
+      await requestCode()
     } catch (reason) {
-      setError(reason instanceof Error ? reason.message : 'Giriş bağlantısı gönderilemedi.')
+      setError(reason instanceof Error ? reason.message : 'Giriş kodu gönderilemedi.')
     } finally {
       setBusy(false)
     }
   }
 
+  async function submitCode(event: FormEvent) {
+    event.preventDefault()
+    const cleaned = code.replace(/\D/g, '')
+    if (cleaned.length !== 6) {
+      setError('6 haneli doğrulama kodunu gir.')
+      return
+    }
+    setBusy(true)
+    setError('')
+    try {
+      await onVerify(email.trim().toLowerCase(), cleaned)
+    } catch (reason) {
+      setError(reason instanceof Error ? reason.message : 'Kod doğrulanamadı.')
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  async function resendCode() {
+    if (resendIn > 0) return
+    setBusy(true)
+    setError('')
+    try {
+      await requestCode()
+    } catch (reason) {
+      setError(reason instanceof Error ? reason.message : 'Yeni kod gönderilemedi.')
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  function useDifferentEmail() {
+    setStep('email')
+    setCode('')
+    setError('')
+    setResendIn(0)
+  }
+
   return (
     <main className="auth-page">
       <section className="auth-card">
-        <div className="auth-logo"><LogoMark size={38} /></div>
-        <p className="eyebrow">NOTLUK</p>
-        <h1>{sent ? 'E-postanı kontrol et' : 'Notlarına dön'}</h1>
-        <p className="auth-copy">
-          {sent
-            ? `${email} adresine güvenli bir giriş bağlantısı gönderdik.`
-            : 'Şifre yok. E-posta adresinle güvenli bağlantı üzerinden giriş yap.'}
-        </p>
-        {sent ? (
-          <div className="auth-sent">
-            <Check size={20} />
-            Bağlantıya tıkladığında Notluk otomatik açılacak.
-          </div>
+        <div className="auth-logo"><LogoMark size={46} /></div>
+        {step === 'code' ? (
+          <>
+            <h1>Doğrulama kodunu gir</h1>
+            <p className="auth-copy strong">
+              6 haneli kodu <strong>{email}</strong> adresine gönderdik.
+            </p>
+            <p className="auth-note">
+              Kodun gelmesi birkaç dakika sürebilir. Spam klasörünü de kontrol et.
+            </p>
+            <form onSubmit={submitCode} className="auth-form">
+              <label htmlFor="auth-code">Doğrulama kodu</label>
+              <input
+                id="auth-code"
+                className="auth-code-input"
+                inputMode="numeric"
+                autoComplete="one-time-code"
+                pattern="[0-9]*"
+                maxLength={6}
+                placeholder="1 2 3 4 5 6"
+                value={code}
+                onChange={(event) => setCode(event.target.value.replace(/\D/g, '').slice(0, 6))}
+                autoFocus
+              />
+              {error && <p className="form-error">{error}</p>}
+              <button className="primary-button large auth-submit" disabled={busy}>
+                {busy && <LoaderCircle size={16} className="spin" />}
+                Doğrula
+              </button>
+            </form>
+            <button type="button" className="text-button auth-back" onClick={useDifferentEmail}>
+              Farklı e-posta kullan
+            </button>
+            <button type="button" className="text-button auth-resend" onClick={() => void resendCode()} disabled={busy || resendIn > 0}>
+              {resendIn > 0 ? `${resendIn} sn sonra yeni kod isteyebilirsin` : 'Yeni kod gönder'}
+            </button>
+          </>
         ) : (
-          <form onSubmit={submit} className="auth-form">
+          <>
+            <h1>Notluk'a giriş yap</h1>
+            <form onSubmit={submitEmail} className="auth-form">
             <label htmlFor="auth-email">E-posta adresi</label>
             <input
               id="auth-email"
@@ -196,19 +276,17 @@ function AuthScreen({
               autoFocus
             />
             {error && <p className="form-error">{error}</p>}
-            <button className="primary-button large" disabled={busy}>
+            <button className="primary-button large auth-submit" disabled={busy}>
               {busy && <LoaderCircle size={16} className="spin" />}
-              Giriş bağlantısı gönder
+              Kod gönder
             </button>
           </form>
+          </>
         )}
-        {sent && (
-          <button type="button" className="text-button" onClick={() => setSent(false)}>
-            Farklı adres kullan
-          </button>
-        )}
-        <div className="auth-divider"><span>veya</span></div>
-        <button type="button" className="secondary-button large" onClick={onDemo}>
+        <p className="auth-legal">
+          Notluk'u kullanarak gizlilik ve kullanım şartlarını kabul etmiş olursun.
+        </p>
+        <button type="button" className="text-button auth-demo" onClick={onDemo}>
           Demo moduna dön
         </button>
       </section>
@@ -848,7 +926,7 @@ function App() {
   }
 
   if (app.isCloud && !app.session) {
-    return <AuthScreen onSignIn={app.signIn} onDemo={app.useDemoMode} />
+    return <AuthScreen onSignIn={app.signIn} onVerify={app.verifySignIn} onDemo={app.useDemoMode} />
   }
 
   return (

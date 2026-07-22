@@ -29,8 +29,9 @@ import {
   getSupabase,
   inviteCloudMember,
   loadCloudData,
-  sendMagicLink,
+  sendSignInCode,
   upsertCloudNote,
+  verifySignInCode,
 } from '../lib/supabase'
 import { sanitizeNoteHtml } from '../lib/sanitize'
 
@@ -518,7 +519,15 @@ export function useNotluk() {
   const signIn = useCallback(
     async (email: string) => {
       if (!clientRef.current) return
-      await sendMagicLink(clientRef.current, email)
+      await sendSignInCode(clientRef.current, email)
+    },
+    [],
+  )
+
+  const verifySignIn = useCallback(
+    async (email: string, token: string) => {
+      if (!clientRef.current) return
+      await verifySignInCode(clientRef.current, email, token)
     },
     [],
   )
@@ -557,6 +566,7 @@ export function useNotluk() {
     useDemoMode,
     resetDemo,
     signIn,
+    verifySignIn,
     signOut,
     toast,
   }

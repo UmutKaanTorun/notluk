@@ -75,9 +75,10 @@ npm run build
 1. Supabase üzerinde yeni bir proje oluşturun.
 2. `supabase/schema.sql` dosyasını Dashboard -> SQL Editor içinde çalıştırın.
 3. Authentication -> URL Configuration -> Redirect URLs alanına `notluk://auth/callback` ekleyin.
-4. Uygulamada Ayarlar -> Bulut ve ortak çalışma bölümünü açın.
-5. Project URL ve publishable key değerlerini girin.
-6. E-postaya gelen bağlantı ile giriş yapın.
+4. Authentication -> Email Templates -> Magic Link şablonunda `{{ .Token }}` değerini görünür hale getirin.
+5. Uygulamada Ayarlar -> Bulut ve ortak çalışma bölümünü açın.
+6. Project URL ve publishable key değerlerini girin.
+7. E-postaya gelen 6 haneli kod ile giriş yapın.
 
 `sb_publishable_...` anahtarı istemci uygulamalarında kullanılmak üzere tasarlanmıştır ve derlenmiş masaüstü uygulamasında bulunabilir. `sb_secret_...` veya `service_role` anahtarını hiçbir zaman uygulamaya, GitHub'a ya da sohbetlere eklemeyin.
 

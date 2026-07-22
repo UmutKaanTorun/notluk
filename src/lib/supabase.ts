@@ -22,11 +22,20 @@ export function getSupabase(config: CloudConfig): SupabaseClient {
   return activeClient
 }
 
-export async function sendMagicLink(client: SupabaseClient, email: string): Promise<void> {
+export async function sendSignInCode(client: SupabaseClient, email: string): Promise<void> {
   const redirectTo = import.meta.env.VITE_AUTH_REDIRECT_URL || 'notluk://auth/callback'
   const { error } = await client.auth.signInWithOtp({
     email,
     options: { emailRedirectTo: redirectTo },
+  })
+  if (error) throw error
+}
+
+export async function verifySignInCode(client: SupabaseClient, email: string, token: string): Promise<void> {
+  const { error } = await client.auth.verifyOtp({
+    email,
+    token,
+    type: 'email',
   })
   if (error) throw error
 }

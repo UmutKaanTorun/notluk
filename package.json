@@ -2,7 +2,7 @@
   "name": "notluk",
   "private": true,
   "version": "0.1.0",
-  "description": "Mac için sade, ortak çalışmalı not uygulaması",
+  "description": "Mac için sade ve hızlı not tutma uygulaması",
   "author": "Umut Torun",
   "license": "MIT",
   "type": "module",
