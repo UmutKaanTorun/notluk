@@ -56,9 +56,10 @@ function openExternal(url: string) {
 
 export function useNotluk() {
   const initialUi = useMemo(() => loadUiState(), [])
+  const demoAvailable = import.meta.env.DEV || import.meta.env.VITE_ENABLE_DEMO === 'true'
   const [cloudConfig, setCloudConfigState] = useState<CloudConfig | null>(() => loadCloudConfig())
   const [session, setSession] = useState<Session | null>(null)
-  const [data, setData] = useState<AppData>(() => (cloudConfig ? emptyData : loadLocalData()))
+  const [data, setData] = useState<AppData>(() => (cloudConfig || !demoAvailable ? emptyData : loadLocalData()))
   const [loading, setLoading] = useState(Boolean(cloudConfig))
   const [authLoading, setAuthLoading] = useState(Boolean(cloudConfig))
   const [saveState, setSaveState] = useState<SaveState>(cloudConfig ? 'saving' : 'saved')
@@ -107,6 +108,7 @@ export function useNotluk() {
 
   useEffect(() => {
     if (!cloudConfig) {
+      if (!demoAvailable) setData(emptyData)
       setAuthLoading(false)
       setLoading(false)
       return
@@ -540,6 +542,7 @@ export function useNotluk() {
     data,
     session,
     cloudConfig,
+    demoAvailable,
     isCloud,
     loading,
     authLoading,

@@ -141,11 +141,9 @@ function SaveIndicator({ state, cloud }: { state: SaveState; cloud: boolean }) {
 function AuthScreen({
   onSignIn,
   onVerify,
-  onDemo,
 }: {
   onSignIn: (email: string) => Promise<void>
   onVerify: (email: string, code: string) => Promise<void>
-  onDemo: () => void
 }) {
   const [email, setEmail] = useState('')
   const [code, setCode] = useState('')
@@ -286,9 +284,59 @@ function AuthScreen({
         <p className="auth-legal">
           Notluk'u kullanarak gizlilik ve kullanım şartlarını kabul etmiş olursun.
         </p>
-        <button type="button" className="text-button auth-demo" onClick={onDemo}>
-          Demo moduna dön
-        </button>
+      </section>
+    </main>
+  )
+}
+
+function CloudSetupScreen({ onConfigure }: { onConfigure: (config: CloudConfig) => void }) {
+  const [url, setUrl] = useState('')
+  const [anonKey, setAnonKey] = useState('')
+  const [error, setError] = useState('')
+
+  function connect(event: FormEvent) {
+    event.preventDefault()
+    if (!url.startsWith('https://') || anonKey.trim().length < 20) {
+      setError('Geçerli Supabase URL ve publishable key değerlerini gir.')
+      return
+    }
+    onConfigure({ url: url.trim().replace(/\/$/, ''), anonKey: anonKey.trim() })
+  }
+
+  return (
+    <main className="auth-page">
+      <section className="auth-card">
+        <div className="auth-logo"><LogoMark size={46} /></div>
+        <h1>Notluk bağlantısı</h1>
+        <p className="auth-copy">
+          Giriş yapmak için Notluk'un Supabase bağlantısı gerekiyor.
+        </p>
+        <form onSubmit={connect} className="auth-form">
+          <label htmlFor="setup-url">Project URL</label>
+          <input
+            id="setup-url"
+            type="url"
+            placeholder="https://projen.supabase.co"
+            value={url}
+            onChange={(event) => setUrl(event.target.value)}
+            autoFocus
+          />
+          <label htmlFor="setup-key">Publishable key</label>
+          <textarea
+            id="setup-key"
+            placeholder="sb_publishable_..."
+            value={anonKey}
+            onChange={(event) => setAnonKey(event.target.value)}
+            rows={3}
+          />
+          {error && <p className="form-error">{error}</p>}
+          <button className="primary-button large auth-submit">
+            Bağlan
+          </button>
+        </form>
+        <p className="auth-legal">
+          Bu bilgiler cihazda saklanır ve giriş kodu göndermek için kullanılır.
+        </p>
       </section>
     </main>
   )
@@ -388,7 +436,7 @@ function Sidebar({
         </button>
         <div className={`connection-pill ${cloud ? 'cloud' : 'local'}`}>
           {cloud ? <Cloud size={13} /> : <Sparkles size={13} />}
-          {cloud ? 'Bulut bağlı' : 'Yerel demo'}
+          {cloud ? 'Bulut bağlı' : 'Yerel'}
         </div>
       </div>
     </aside>
@@ -836,7 +884,7 @@ function SettingsModal({
         <section className="settings-section">
           <div className="settings-title-row">
             <div><h3>Bulut ve ortak çalışma</h3><p>Supabase projesini bağlayarak gerçek cihazlar arasında senkronizasyonu aç.</p></div>
-            <span className={`status-tag ${cloud ? 'connected' : ''}`}>{cloud ? 'Bağlı' : 'Demo'}</span>
+            <span className={`status-tag ${cloud ? 'connected' : ''}`}>{cloud ? 'Bağlı' : 'Yerel'}</span>
           </div>
           {!cloud ? (
             <form className="cloud-form" onSubmit={connect}>
@@ -857,7 +905,7 @@ function SettingsModal({
         </section>
         {!cloud && (
           <section className="settings-section danger-zone">
-            <div><h3>Demo verileri</h3><p>Yerel değişiklikleri silerek başlangıç verilerine dön.</p></div>
+            <div><h3>Yerel veriler</h3><p>Yerel değişiklikleri silerek başlangıç verilerine dön.</p></div>
             <button className="secondary-button" onClick={onResetDemo}><RotateCcw size={14} /> Yenile</button>
           </section>
         )}
@@ -925,8 +973,12 @@ function App() {
     return <div className="splash"><LogoMark size={42} /><LoaderCircle size={20} className="spin" /></div>
   }
 
+  if (!app.cloudConfig && !app.demoAvailable) {
+    return <CloudSetupScreen onConfigure={app.configureCloud} />
+  }
+
   if (app.isCloud && !app.session) {
-    return <AuthScreen onSignIn={app.signIn} onVerify={app.verifySignIn} onDemo={app.useDemoMode} />
+    return <AuthScreen onSignIn={app.signIn} onVerify={app.verifySignIn} />
   }
 
   return (
