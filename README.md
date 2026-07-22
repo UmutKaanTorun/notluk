@@ -11,21 +11,19 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/UmutKaanTorun/notluk/releases/latest/download/Notluk-arm64.dmg"><strong>Apple Silicon DMG indir</strong></a>
+  <a href="https://github.com/UmutKaanTorun/notluk/releases/download/v1.0.0/Notluk-1.0.0-arm64.dmg"><strong>Apple Silicon DMG indir</strong></a>
   ·
-  <a href="https://github.com/UmutKaanTorun/notluk/releases/latest/download/Notluk-x64.dmg"><strong>Intel DMG indir</strong></a>
-  ·
-  <a href="https://github.com/UmutKaanTorun/notluk/releases/latest">Son sürüm</a>
+  <a href="https://github.com/UmutKaanTorun/notluk/releases/download/v1.0.0/Notluk-1.0.0-x64.dmg"><strong>Intel DMG indir</strong></a>
 </p>
 
-![Notluk arayüzü](https://github.com/UmutKaanTorun/notluk/releases/latest/download/notluk.png)
+![Notluk arayüzü](https://github.com/UmutKaanTorun/notluk/releases/download/v1.0.0/notluk.png)
 
-Notluk, Mac'te hızlı açılan, sade ve dikkat dağıtmayan bir not tutma uygulamasıdır. Yerel demo modu ile hemen yazmaya başlayabilir; istersen Supabase bağlantısıyla çalışma alanlarını ve ortak notları senkronize edebilirsin.
+Notluk, Mac'te hızlı açılan, sade ve dikkat dağıtmayan bir not tutma uygulamasıdır. Hesap kurmadan yerelde yazmaya başlayabilir; istersen Supabase bağlantısıyla çalışma alanlarını ve ortak notları senkronize edebilirsin.
 
 ## İndir
 
-- [Apple Silicon için DMG](https://github.com/UmutKaanTorun/notluk/releases/latest/download/Notluk-arm64.dmg)
-- [Intel Mac için DMG](https://github.com/UmutKaanTorun/notluk/releases/latest/download/Notluk-x64.dmg)
+- [Apple Silicon için DMG](https://github.com/UmutKaanTorun/notluk/releases/download/v1.0.0/Notluk-1.0.0-arm64.dmg)
+- [Intel Mac için DMG](https://github.com/UmutKaanTorun/notluk/releases/download/v1.0.0/Notluk-1.0.0-x64.dmg)
 
 Notluk ad-hoc imzalıdır ancak Apple tarafından noterlenmemiştir. macOS yine engellerse Terminal'de şu komutu çalıştırıp uygulamayı tekrar açın:
 
@@ -39,7 +37,7 @@ xattr -dr com.apple.quarantine /Applications/Notluk.app
 - Not oluşturma, düzenleme, arama, favorileme ve çöp kutusu
 - Zengin metin araçları ve otomatik kayıt
 - Açık, koyu ve sistem teması
-- İnternet veya hesap gerektirmeyen yerel demo modu
+- İnternet veya hesap gerektirmeyen yerel kullanım
 - Supabase ile e-posta üzerinden şifresiz giriş
 - E-posta adresine göre üyelik ve görüntüleme/düzenleme yetkileri
 - Supabase Realtime ile cihazlar arası canlı güncelleme
@@ -49,7 +47,7 @@ xattr -dr com.apple.quarantine /Applications/Notluk.app
 
 | Açık tema | Koyu tema |
 | --- | --- |
-| ![Notluk açık tema](https://github.com/UmutKaanTorun/notluk/releases/latest/download/notluk.png) | ![Notluk koyu tema](https://github.com/UmutKaanTorun/notluk/releases/latest/download/notluk-dark.png) |
+| ![Notluk açık tema](https://github.com/UmutKaanTorun/notluk/releases/download/v1.0.0/notluk.png) | ![Notluk koyu tema](https://github.com/UmutKaanTorun/notluk/releases/download/v1.0.0/notluk-dark.png) |
 
 ## Yerel Geliştirme
 
