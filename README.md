@@ -1,10 +1,31 @@
-# Notluk
+<p align="center">
+  <img src="build/icon.png" width="104" alt="Notluk logo">
+</p>
 
-Mac için sade, hızlı ve ortak çalışmaya hazır not uygulaması.
+<h1 align="center">Notluk</h1>
+
+<p align="center">
+  Mac için sade, hızlı ve ortak çalışmaya hazır not uygulaması.
+</p>
+
+<p align="center">
+  <a href="https://github.com/UmutKaanTorun/notluk/releases/latest/download/Notluk-0.1.0-arm64.dmg"><strong>Apple Silicon DMG indir</strong></a>
+  ·
+  <a href="https://github.com/UmutKaanTorun/notluk/releases/latest/download/Notluk-0.1.0-x64.dmg"><strong>Intel DMG indir</strong></a>
+  ·
+  <a href="https://github.com/UmutKaanTorun/notluk/releases/latest">Son sürüm</a>
+</p>
 
 ![Notluk arayüzü](docs/images/notluk.png)
 
 Notluk, yerel demo moduyla hemen açılan; Supabase bağlandığında e-posta ile şifresiz giriş, çalışma alanı üyeliği ve cihazlar arası canlı güncelleme sunan bir Electron uygulamasıdır.
+
+## İndir
+
+- [Apple Silicon için DMG](https://github.com/UmutKaanTorun/notluk/releases/latest/download/Notluk-0.1.0-arm64.dmg)
+- [Intel Mac için DMG](https://github.com/UmutKaanTorun/notluk/releases/latest/download/Notluk-0.1.0-x64.dmg)
+
+macOS uygulama imzalanmamış derlemeyi açarken uyarı gösterebilir. Dosyayı sağ tıklayıp **Aç** seçeneğini kullanın.
 
 ## Özellikler
 
