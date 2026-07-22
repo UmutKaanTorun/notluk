@@ -11,9 +11,9 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/UmutKaanTorun/notluk/releases/latest/download/Notluk-0.1.0-arm64.dmg"><strong>Apple Silicon DMG indir</strong></a>
+  <a href="https://github.com/UmutKaanTorun/notluk/releases/latest/download/Notluk-0.1.3-arm64.dmg"><strong>Apple Silicon DMG indir</strong></a>
   ·
-  <a href="https://github.com/UmutKaanTorun/notluk/releases/latest/download/Notluk-0.1.0-x64.dmg"><strong>Intel DMG indir</strong></a>
+  <a href="https://github.com/UmutKaanTorun/notluk/releases/latest/download/Notluk-0.1.3-x64.dmg"><strong>Intel DMG indir</strong></a>
   ·
   <a href="https://github.com/UmutKaanTorun/notluk/releases/latest">Son sürüm</a>
 </p>
@@ -24,8 +24,8 @@ Notluk, Mac'te hızlı açılan, sade ve dikkat dağıtmayan bir not tutma uygul
 
 ## İndir
 
-- [Apple Silicon için DMG](https://github.com/UmutKaanTorun/notluk/releases/latest/download/Notluk-0.1.0-arm64.dmg)
-- [Intel Mac için DMG](https://github.com/UmutKaanTorun/notluk/releases/latest/download/Notluk-0.1.0-x64.dmg)
+- [Apple Silicon için DMG](https://github.com/UmutKaanTorun/notluk/releases/latest/download/Notluk-0.1.3-arm64.dmg)
+- [Intel Mac için DMG](https://github.com/UmutKaanTorun/notluk/releases/latest/download/Notluk-0.1.3-x64.dmg)
 
 macOS uygulama imzalanmamış derlemeyi açarken uyarı gösterebilir. Dosyayı sağ tıklayıp **Aç** seçeneğini kullanın.
 
