@@ -69,22 +69,35 @@ button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-
 
 ::selection { background: color-mix(in srgb, var(--accent) 24%, transparent); }
 
-.app-shell { height: 100%; display: grid; grid-template-rows: 54px minmax(0, 1fr); background: var(--bg); }
+.app-shell { height: 100%; display: grid; grid-template-rows: 52px minmax(0, 1fr); background: var(--bg); }
 
 .titlebar {
   position: relative;
   display: flex;
   align-items: center;
-  height: 54px;
-  padding: 0 14px 0 78px;
+  height: 52px;
+  padding: 0 16px 0 92px;
   background: color-mix(in srgb, var(--surface) 93%, transparent);
   border-bottom: 1px solid var(--border);
   -webkit-app-region: drag;
   user-select: none;
 }
 
-.app-title { display: flex; align-items: center; gap: 9px; font-size: 13.5px; }
-.app-title strong { font-weight: 680; letter-spacing: 0; }
+.app-title {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 12px;
+  pointer-events: none;
+}
+.app-title .logo-mark { flex: 0 0 auto; border-radius: 7px; }
+.app-title strong {
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
 
 .logo-mark {
   display: inline-flex;

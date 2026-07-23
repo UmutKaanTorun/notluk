@@ -984,7 +984,7 @@ function App() {
   return (
     <div className="app-shell">
       <header className="titlebar">
-        <div className="app-title"><LogoMark /><strong>Notluk</strong></div>
+        <div className="app-title"><LogoMark size={24} /><strong>Notluk</strong></div>
         <button type="button" className="quick-new" onClick={() => void app.createNote()}><Plus size={14} /><kbd>⌘N</kbd></button>
       </header>
       <div className="workspace-layout">

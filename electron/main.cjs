@@ -33,7 +33,7 @@ function createWindow() {
     backgroundColor: '#f7f7f8',
     title: 'Notluk',
     titleBarStyle: 'hiddenInset',
-    trafficLightPosition: { x: 18, y: 19 },
+    trafficLightPosition: { x: 18, y: 18 },
     show: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.cjs'),
