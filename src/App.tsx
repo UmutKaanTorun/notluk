@@ -29,6 +29,7 @@ import {
   LoaderCircle,
   LogOut,
   Moon,
+  Palette,
   Plus,
   Quote,
   RotateCcw,
@@ -39,10 +40,11 @@ import {
   Star,
   Sun,
   Trash2,
+  UserRound,
   Users,
   X,
 } from 'lucide-react'
-import type { CloudConfig, Member, MemberRole, Note, SaveState, Workspace } from './types'
+import type { AppUser, CloudConfig, Member, MemberRole, Note, SaveState, Workspace } from './types'
 import { THEME_KEY } from './lib/storage'
 import { type NoteFilter, useNotluk } from './hooks/useNotluk'
 
@@ -840,73 +842,132 @@ function NewWorkspaceModal({ onClose, onCreate }: { onClose: () => void; onCreat
 function SettingsModal({
   theme,
   cloud,
-  config,
+  user,
   onTheme,
-  onConfigure,
   onResetDemo,
   onSignOut,
   onClose,
 }: {
   theme: Theme
   cloud: boolean
-  config: CloudConfig | null
+  user: AppUser
   onTheme: (theme: Theme) => void
-  onConfigure: (config: CloudConfig) => void
   onResetDemo: () => void
   onSignOut: () => Promise<void>
   onClose: () => void
 }) {
-  const [url, setUrl] = useState(config?.url || '')
-  const [anonKey, setAnonKey] = useState(config?.anonKey || '')
-  const [error, setError] = useState('')
+  const [activeTab, setActiveTab] = useState<'account' | 'appearance'>('account')
+  const [signingOut, setSigningOut] = useState(false)
+  const [accountError, setAccountError] = useState('')
 
-  function connect(event: FormEvent) {
-    event.preventDefault()
-    if (!url.startsWith('https://') || anonKey.trim().length < 20) {
-      setError('Geçerli Supabase URL ve publishable key değerlerini gir.')
-      return
+  async function signOut() {
+    setSigningOut(true)
+    setAccountError('')
+    try {
+      await onSignOut()
+      onClose()
+    } catch {
+      setAccountError('Çıkış yapılamadı. Lütfen yeniden dene.')
+      setSigningOut(false)
     }
-    onConfigure({ url: url.trim().replace(/\/$/, ''), anonKey: anonKey.trim() })
-    onClose()
   }
 
   return (
     <Modal title="Ayarlar" onClose={onClose}>
       <div className="settings-content">
-        <section className="settings-section">
-          <h3>Görünüm</h3>
-          <div className="theme-switcher">
-            <button className={theme === 'light' ? 'selected' : ''} onClick={() => onTheme('light')}><Sun size={16} /> Açık</button>
-            <button className={theme === 'dark' ? 'selected' : ''} onClick={() => onTheme('dark')}><Moon size={16} /> Koyu</button>
-            <button className={theme === 'system' ? 'selected' : ''} onClick={() => onTheme('system')}><Settings size={16} /> Sistem</button>
-          </div>
-        </section>
-        <section className="settings-section">
-          <div className="settings-title-row">
-            <div><h3>Bulut ve ortak çalışma</h3><p>Supabase projesini bağlayarak gerçek cihazlar arasında senkronizasyonu aç.</p></div>
-            <span className={`status-tag ${cloud ? 'connected' : ''}`}>{cloud ? 'Bağlı' : 'Yerel'}</span>
-          </div>
-          {!cloud ? (
-            <form className="cloud-form" onSubmit={connect}>
-              <label htmlFor="supabase-url">Project URL</label>
-              <input id="supabase-url" value={url} onChange={(event) => setUrl(event.target.value)} placeholder="https://projen.supabase.co" />
-              <label htmlFor="supabase-key">Publishable key</label>
-              <textarea id="supabase-key" value={anonKey} onChange={(event) => setAnonKey(event.target.value)} placeholder="sb_publishable_..." rows={3} />
-              {error && <p className="form-error">{error}</p>}
-              <button className="primary-button"><Cloud size={15} /> Buluta bağlan</button>
-            </form>
-          ) : (
-            <div className="connected-card">
-              <Cloud size={18} />
-              <div><strong>Supabase bağlantısı etkin</strong><span>{config?.url}</span></div>
-              <button className="secondary-button" onClick={onSignOut}><LogOut size={14} /> Çıkış yap</button>
+        <div className="settings-tabs" role="tablist" aria-label="Ayar bölümleri">
+          <button
+            type="button"
+            role="tab"
+            id="settings-account-tab"
+            aria-controls="settings-account-panel"
+            aria-selected={activeTab === 'account'}
+            className={activeTab === 'account' ? 'selected' : ''}
+            onClick={() => setActiveTab('account')}
+          >
+            <UserRound size={15} /> Hesap
+          </button>
+          <button
+            type="button"
+            role="tab"
+            id="settings-appearance-tab"
+            aria-controls="settings-appearance-panel"
+            aria-selected={activeTab === 'appearance'}
+            className={activeTab === 'appearance' ? 'selected' : ''}
+            onClick={() => setActiveTab('appearance')}
+          >
+            <Palette size={15} /> Görünüm
+          </button>
+        </div>
+
+        {activeTab === 'account' ? (
+          <section
+            className="settings-panel"
+            id="settings-account-panel"
+            role="tabpanel"
+            aria-labelledby="settings-account-tab"
+          >
+            <div className="account-profile">
+              <Avatar member={user} size="large" />
+              <div>
+                <strong>{user.name}</strong>
+                <span>{user.email}</span>
+              </div>
             </div>
-          )}
-        </section>
-        {!cloud && (
-          <section className="settings-section danger-zone">
-            <div><h3>Yerel veriler</h3><p>Yerel değişiklikleri silerek başlangıç verilerine dön.</p></div>
-            <button className="secondary-button" onClick={onResetDemo}><RotateCcw size={14} /> Yenile</button>
+
+            <div className="account-status">
+              <span className={`account-status-icon ${cloud ? 'connected' : ''}`}>
+                {cloud ? <Cloud size={17} /> : <CloudOff size={17} />}
+              </span>
+              <div>
+                <strong>{cloud ? 'Senkronizasyon açık' : 'Yerel kullanım'}</strong>
+                <span>
+                  {cloud
+                    ? 'Notların bu hesapla bağlı cihazlarda güncel tutuluyor.'
+                    : 'Notların yalnızca bu cihazda saklanıyor.'}
+                </span>
+              </div>
+              <span className={`status-tag ${cloud ? 'connected' : ''}`}>{cloud ? 'Açık' : 'Bu cihaz'}</span>
+            </div>
+
+            <div className="account-actions">
+              <div>
+                <strong>{cloud ? 'Oturum' : 'Örnek veriler'}</strong>
+                <span>
+                  {cloud
+                    ? 'Bu cihazdaki hesabından güvenli şekilde çık.'
+                    : 'Yerel notları başlangıç durumuna geri döndür.'}
+                </span>
+              </div>
+              {cloud ? (
+                <button type="button" className="secondary-button" disabled={signingOut} onClick={() => void signOut()}>
+                  {signingOut ? <LoaderCircle size={14} className="spin" /> : <LogOut size={14} />}
+                  Çıkış yap
+                </button>
+              ) : (
+                <button type="button" className="secondary-button" onClick={onResetDemo}>
+                  <RotateCcw size={14} /> Verileri yenile
+                </button>
+              )}
+            </div>
+            {accountError && <p className="form-error account-error">{accountError}</p>}
+          </section>
+        ) : (
+          <section
+            className="settings-panel"
+            id="settings-appearance-panel"
+            role="tabpanel"
+            aria-labelledby="settings-appearance-tab"
+          >
+            <div className="settings-heading">
+              <h3>Tema</h3>
+              <p>Notluk'un görünümünü çalışma ortamına göre ayarla.</p>
+            </div>
+            <div className="theme-switcher">
+              <button type="button" className={theme === 'light' ? 'selected' : ''} onClick={() => onTheme('light')}><Sun size={16} /> Açık</button>
+              <button type="button" className={theme === 'dark' ? 'selected' : ''} onClick={() => onTheme('dark')}><Moon size={16} /> Koyu</button>
+              <button type="button" className={theme === 'system' ? 'selected' : ''} onClick={() => onTheme('system')}><Settings size={16} /> Sistem</button>
+            </div>
           </section>
         )}
       </div>
@@ -1038,9 +1099,8 @@ function App() {
         <SettingsModal
           theme={theme}
           cloud={app.isCloud}
-          config={app.cloudConfig}
+          user={app.data.user}
           onTheme={setTheme}
-          onConfigure={app.configureCloud}
           onResetDemo={app.resetDemo}
           onSignOut={app.signOut}
           onClose={() => setSettingsOpen(false)}
